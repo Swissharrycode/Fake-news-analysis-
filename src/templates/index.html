@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake News Detection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body
+ class="m-0 p-0 relative w-full h-screen flex flex-col items-center select-none justify-center "
+>
+    <h1 class="text-5xl animate-bounce font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-purple-600 to-indigo-600">Fake News Detection System</h1>
+    <p class="text-sm font-medium text-black/80 py-8">A machine learning experiment that uses Scikit-learn Numpy and Pandas to detect bogus news.</p>
+    <form action="/" class="flex flex-col items-center space-y-10" method="POST">
+        {% csrf_token %}
+        <textarea name="news" id="news" cols="90" rows="10" placeholder="Type News Here" maxlength="225" required
+        class="text-black placeholder:text-black/80 p-2 outline-none rounded-lg drop-shadow-2xl border-2 border-white/80 focus:border-indigo-600"
+        >{{news}}</textarea>
+        <button type="submit" class="w-full bg-indigo-600 py-2 rounded-lg text-white hover:bg-indigo-700 active:ring-2 ring-offset-2 ring-offset-white ring-indigo-600">Analyse</button>
+    </form>
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+                <div class="w-1/4 h-20 rounded-l-xl absolute right-0 top-16 bg-red-200 flex items-center justify-center text-red-600 font-medium">
+                    {{message}}
+                </div>
+            {% else %}
+                <div class="w-1/4 h-20 rounded-l-xl absolute right-0 top-16 bg-green-200 flex items-center justify-center text-green-600 font-medium">
+                    {{message}}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
